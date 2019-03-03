@@ -1,0 +1,474 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Questionário</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="cardfont" style="color: dark">
+  <!--Questao 1-->
+  <ion-card *ngIf="questao==1">
+    <ion-card-content>
+      <p>Qual é o seu objetivo?</p>
+      <br>
+      <textarea rows="3" cols="25" [(ngModel)]="q1Resp">
+        </textarea>
+
+    </ion-card-content>
+  </ion-card>
+  <!--Questao 2-->
+  <ion-card *ngIf="questao==2">
+      <ion-card-content>
+         <p>Qual é frequência, na semana, que pretende treinar?</p>
+         <ion-item>
+              <ion-range min="1" max="7" step="1" snaps="true" [(ngModel)]="q2Resp" color="dark"></ion-range>
+        </ion-item>
+        <p style="text-align: center">{{q2Resp}} {{q2Resp===1 ? 'vez' : 'vezes'}} por semana</p>
+      </ion-card-content>
+    </ion-card>
+  <!--Questao 3-->
+  <ion-card *ngIf="questao==3">
+    <ion-card-content>
+        <p>Informações Físicas:</p><p></p>
+        <div style="font-size: 80%">
+            <span>Peso:</span>&nbsp;<input type="number" min="1" max="200" [(ngModel)]="q3Resp1"/>&nbsp;kg
+        </div>
+        <br>
+        <div style="font-size: 80%">
+            <span>Altura:</span>&nbsp;<input type="number" min="1" max="200" [(ngModel)]="q3Resp2"/>&nbsp;cm
+        </div>
+        <br>
+        <div style="font-size: 80%">
+            <span>Frequência Cardíaca:</span>&nbsp;<input type="number" min="1" max="200" [(ngModel)]="q3Resp3"/>
+        </div>
+        <br>
+        <p style="font-size: 82%;text-align: justify;margin-top: 2px" icon-start>
+            <ion-icon style="color:blue;font-size:20px" name="alert"></ion-icon>
+             Instruções- Permaneça em repouso sentado(a) por no mínimo 5 minutos, evite falar,
+             gesticular. Com os dedos indicador e médio colocados na lateral do seu pescoço,
+             encontre sua pulsação (batimentos do coração), conte quantas vezes seu coração
+             bate em 10 segundos. Repita a operação novamente para ter certeza que não contou errado.</p>
+ <!--     <ion-list>
+        <ion-item>
+            <ion-label style="font-size:60%">Peso (kg)</ion-label>
+            <ion-input type="text" [(ngModel)]="q3Resp1"></ion-input>
+
+        </ion-item>
+        <ion-item>
+            <ion-label style="font-size:60%">Altura (cm)</ion-label>
+            <ion-input type="text" [(ngModel)]="q3Resp2"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label style="font-size:60%">Frequência Cardíaca (Repouso)</ion-label>
+            <ion-input type="text" [(ngModel)]="q3Resp3"></ion-input>
+        </ion-item>
+        <p style="font-size: 82%;text-align: justify;margin-top: 2px" icon-start>
+          <ion-icon style="color:blue;font-size:20px" name="alert"></ion-icon>
+           Instruções- Permaneça em repouso sentado(a) por no mínimo 5 minutos, evite falar,
+           gesticular. Com os dedos indicador e médio colocados na lateral do seu pescoço,
+           encontre sua pulsação (batimentos do coração), conte quantas vezes seu coração
+           bate em 10 segundos. Repita a operação novamente para ter certeza que não contou errado.</p>
+      </ion-list>-->
+    </ion-card-content>
+  </ion-card>
+  <!--Questao 4-->
+  <ion-card *ngIf="questao==4">
+    <ion-card-content>
+      <p>Foi uma criança/adolescente obeso(a) ou com sobrepeso?</p>
+      <ion-list radio-group [(ngModel)]="q4Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Não</ion-label>
+                <ion-radio value="nao"></ion-radio>
+              </ion-item>
+        </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <!--Questao 5-->
+  <ion-card *ngIf="questao==5">
+      <ion-card-content>
+        <p>Seus pais são obesos ou têm sobrepeso?</p>
+        <ion-list radio-group [(ngModel)]="q5Resp">
+              <ion-item>
+                <ion-label class="fontlabel">Sim</ion-label>
+                <ion-radio value="sim"></ion-radio>
+              </ion-item>
+              <ion-item>
+                  <ion-label class="fontlabel">Não</ion-label>
+                  <ion-radio value="nao"></ion-radio>
+                </ion-item>
+          </ion-list>
+      </ion-card-content>
+    </ion-card>
+  <!--Questao 6-->
+  <ion-card *ngIf="questao==6">
+      <ion-card-content>
+        <p>Pratica atividade física?</p>
+        <ion-list radio-group [(ngModel)]="q6Resp">
+              <ion-item>
+                <ion-label class="fontlabel">Sim</ion-label>
+                <ion-radio value="sim"></ion-radio>
+              </ion-item>
+              <ion-item>
+                  <ion-label class="fontlabel">Não</ion-label>
+                  <ion-radio value="nao"></ion-radio>
+                </ion-item>
+          </ion-list>
+          <p>Quais e há quanto tempo?</p>
+          <textarea rows="2" cols="25" [(ngModel)]="q6RespCompl">
+            </textarea>
+      </ion-card-content>
+    </ion-card>
+  <!--Questao 7-->
+  <ion-card *ngIf="questao==7">
+      <ion-card-content>
+        <p>Tem algumas dessas sensações quando faz exercícios?</p>
+        <ion-item>
+            <ion-label>Tontura</ion-label>
+            <ion-checkbox color="dark" ></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Enjoo</ion-label>
+            <ion-checkbox color="dark"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Mal Estar</ion-label>
+            <ion-checkbox color="dark" ></ion-checkbox>
+          </ion-item>
+                <p>Algum outro desconforto?</p>
+          <textarea rows="3" cols="25" [(ngModel)]="binding">
+            </textarea>
+        </ion-card-content>
+    </ion-card>
+  <!--Questao 8-->
+  <ion-card *ngIf="questao==8">
+    <ion-card-content>
+      <p>Possui colesterol alto?</p>
+      <ion-list radio-group [(ngModel)]="q8Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Não</ion-label>
+                <ion-radio value="nao"></ion-radio>
+              </ion-item>
+        </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <!--Questao 9-->
+  <ion-card *ngIf="questao==9">
+    <ion-card-content>
+      <p>Possui triglicérides alto?</p>
+      <ion-list radio-group [(ngModel)]="q9Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Não</ion-label>
+                <ion-radio value="nao"></ion-radio>
+              </ion-item>
+        </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <!--Questao 10-->
+  <ion-card *ngIf="questao==10">
+    <ion-card-content>
+      <p>Possui pressão alta (hipertenso)?</p>
+      <ion-list radio-group [(ngModel)]="q10Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Não</ion-label>
+                <ion-radio value="nao"></ion-radio>
+              </ion-item>
+        </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <!--Questao 11-->
+  <ion-card *ngIf="questao==11">
+    <ion-card-content>
+      <p>Possui diabetes?</p>
+      <ion-list radio-group [(ngModel)]="q11Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim" (ionSelect)="validaDiabetes()"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Não</ion-label>
+                <ion-radio value="nao" (ionSelect)="validaDiabetes()"></ion-radio>
+            </ion-item>
+        </ion-list>
+        <br>
+      <p *ngIf="flagDiabetes">Qual o tipo?</p>
+      <ion-list radio-group [(ngModel)]="q11RespCompl1" *ngIf="flagDiabetes">
+            <ion-item>
+              <ion-label class="fontlabel">Tipo 1</ion-label>
+              <ion-radio value="Tipo 1"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Tipo 2</ion-label>
+                <ion-radio value="Tipo 2"></ion-radio>
+            </ion-item>
+      </ion-list>
+      <br>
+      <p *ngIf="flagDiabetes">Usa medicamento?</p>
+      <ion-list radio-group [(ngModel)]="q11RespCompl2" *ngIf="flagDiabetes">
+            <ion-item>
+              <ion-label class="fontlabel">Uso Insulina</ion-label>
+              <ion-radio value="Insulina"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Uso Remédio</ion-label>
+                <ion-radio value="Remedio"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label class="fontlabel">Não uso medicamento</ion-label>
+              <ion-radio value="NaoUsa"></ion-radio>
+          </ion-item>
+        </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <!--Questao 12-->
+  <ion-card *ngIf="questao==12">
+      <ion-card-content>
+        <p>Possui alguma alteração cardíaca?</p>
+        <ion-list radio-group [(ngModel)]="q12Resp">
+              <ion-item>
+                <ion-label class="fontlabel">Sim</ion-label>
+                <ion-radio value="sim"></ion-radio>
+              </ion-item>
+              <ion-item>
+                  <ion-label class="fontlabel">Não</ion-label>
+                  <ion-radio value="nao"></ion-radio>
+                </ion-item>
+          </ion-list>
+          <p>Qual?</p>
+          <textarea rows="2" cols="25" [(ngModel)]="q12RespCompl">
+            </textarea>
+      </ion-card-content>
+    </ion-card>
+  <!--Questao 13-->
+  <ion-card *ngIf="questao==13">
+      <ion-card-content>
+        <p>Algum parente com problemas cardíacos?</p>
+        <ion-list radio-group [(ngModel)]="q13Resp">
+              <ion-item>
+                <ion-label class="fontlabel">Sim</ion-label>
+                <ion-radio value="sim"></ion-radio>
+              </ion-item>
+              <ion-item>
+                  <ion-label class="fontlabel">Não</ion-label>
+                  <ion-radio value="nao"></ion-radio>
+                </ion-item>
+          </ion-list>
+          <p>Quem?</p>
+          <textarea rows="2" cols="25" [(ngModel)]="q13RespCompl">
+            </textarea>
+      </ion-card-content>
+    </ion-card>
+  <!--Questao 14-->
+  <ion-card *ngIf="questao==14">
+      <ion-card-content>
+        <p>Tem problemas respiratórios?</p>
+        <ion-list radio-group [(ngModel)]="q14Resp">
+              <ion-item>
+                <ion-label class="fontlabel">Sim</ion-label>
+                <ion-radio value="sim"></ion-radio>
+              </ion-item>
+              <ion-item>
+                  <ion-label class="fontlabel">Não</ion-label>
+                  <ion-radio value="nao"></ion-radio>
+                </ion-item>
+          </ion-list>
+          <p>Qual?</p>
+          <textarea rows="2" cols="25" [(ngModel)]="q14RespCompl">
+            </textarea>
+      </ion-card-content>
+    </ion-card>
+  <!--Questao 15-->
+  <ion-card *ngIf="questao==15">
+      <ion-card-content>
+        <p>Usa algum remédio ou droga?</p>
+        <ion-list radio-group [(ngModel)]="q15Resp">
+              <ion-item>
+                <ion-label class="fontlabel">Sim</ion-label>
+                <ion-radio value="sim"></ion-radio>
+              </ion-item>
+              <ion-item>
+                  <ion-label class="fontlabel">Não</ion-label>
+                  <ion-radio value="nao"></ion-radio>
+                </ion-item>
+          </ion-list>
+          <p>Qual?</p>
+          <textarea rows="2" cols="25" [(ngModel)]="q15RespCompl">
+            </textarea>
+      </ion-card-content>
+    </ion-card>
+  <!--Questao 16-->
+  <ion-card *ngIf="questao==16">
+      <ion-card-content>
+        <p>Usa algum tipo de esteróide anabólico?</p>
+        <ion-list radio-group [(ngModel)]="q16Resp">
+              <ion-item>
+                <ion-label class="fontlabel">Sim</ion-label>
+                <ion-radio value="sim"></ion-radio>
+              </ion-item>
+              <ion-item>
+                  <ion-label class="fontlabel">Não</ion-label>
+                  <ion-radio value="nao"></ion-radio>
+                </ion-item>
+          </ion-list>
+          <p>Qual?</p>
+          <textarea rows="2" cols="25" [(ngModel)]="q16RespCompl">
+            </textarea>
+      </ion-card-content>
+    </ion-card>
+ <!--Questao 17-->
+ <ion-card *ngIf="questao==17">
+    <ion-card-content>
+      <p>Tem alguma alergia?</p>
+      <ion-list radio-group [(ngModel)]="q17Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Não</ion-label>
+                <ion-radio value="nao"></ion-radio>
+              </ion-item>
+        </ion-list>
+        <p>Qual?</p>
+        <textarea rows="2" cols="25" [(ngModel)]="q17RespCompl">
+          </textarea>
+    </ion-card-content>
+  </ion-card>
+ <!--Questao 18-->
+ <ion-card *ngIf="questao==18">
+    <ion-card-content>
+      <p>Fez alguma cirurgia?</p>
+      <ion-list radio-group [(ngModel)]="q18Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Não</ion-label>
+                <ion-radio value="nao"></ion-radio>
+              </ion-item>
+        </ion-list>
+        <p>Qual?</p>
+        <textarea rows="2" cols="25" [(ngModel)]="q18RespCompl">
+          </textarea>
+    </ion-card-content>
+  </ion-card>
+ <!--Questao 19-->
+ <ion-card *ngIf="questao==19">
+    <ion-card-content>
+      <p>Sente dores na articulações, coluna ou dores musculares?</p>
+      <br>
+      <p>Explique:</p>
+        <textarea rows="3" cols="25" [(ngModel)]="q19Resp">
+          </textarea>
+    </ion-card-content>
+  </ion-card>
+ <!--Questao 20-->
+ <ion-card *ngIf="questao==20">
+    <ion-card-content>
+      <p>Possui algum problema ortopédico diagnosticado?</p>
+      <ion-list radio-group [(ngModel)]="q20Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Não</ion-label>
+                <ion-radio value="nao"></ion-radio>
+              </ion-item>
+        </ion-list>
+        <p>Qual?</p>
+        <textarea rows="2" cols="25" [(ngModel)]="q20RespCompl">
+          </textarea>
+    </ion-card-content>
+  </ion-card>
+ <!--Questao 21-->
+ <ion-card *ngIf="questao==21">
+    <ion-card-content>
+      <p>Tem alguma recomendação ou restrição médica para prática de exercícios?</p>
+      <ion-list radio-group [(ngModel)]="q21Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label class="fontlabel">Não</ion-label>
+                <ion-radio value="nao"></ion-radio>
+              </ion-item>
+        </ion-list>
+        <p>Qual?</p>
+        <textarea rows="2" cols="25" [(ngModel)]="q12RespCompl">
+          </textarea>
+    </ion-card-content>
+  </ion-card>
+ <!--Questao 22-->
+ <ion-card *ngIf="questao==22">
+    <ion-card-content>
+      <p>Fez teste de esforço, ergométrico ou ergoespirométrico recentemente (menos de 1 ano)?</p>
+      <ion-list radio-group [(ngModel)]="q22Resp">
+            <ion-item>
+              <ion-label class="fontlabel">Sim</ion-label>
+              <ion-radio value="sim"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label class="fontlabel">Não</ion-label>
+              <ion-radio value="nao"></ion-radio>
+            </ion-item>
+        </ion-list>
+        <p>Qual?</p>
+        <textarea rows="2" cols="25" [(ngModel)]="q22RespCompl">
+          </textarea>
+    </ion-card-content>
+  </ion-card>
+  <!--botao de enviar-->
+  <ion-card *ngIf="questao==23">
+        <ion-card-content>
+          <div>
+            <p>Legal, agora falta enviar as informações.</p>
+            <p>Selecione o botão Enviar.</p>
+            <p>Caso não queira enviar agora selecione o botão Cancelar.</p>
+          </div>
+            <p>
+                <button ion-button full (click)="enviarAnamnese()" color="dark">
+                  Enviar
+                </button>
+            </p>
+            <p>
+                <button ion-button full (click)="cancelarAnamnese()" color="dark">
+                  Cancelar
+                </button>
+            </p>
+       </ion-card-content>
+  </ion-card>
+  <!--botoes de navegacao-->
+    <ion-card *ngIf="questao <= questoes">
+      <ion-card-content >
+        <div *ngIf="!flagEnviar"> Questão: {{questao}} de {{questoes}}
+          <p>
+            <button ion-button small icon-start [disabled]="btnAnterior" (click)="previous()" color="dark">
+              <ion-icon name='arrow-back'></ion-icon>
+              Anterior
+            </button>
+            <button ion-button small icon-end [disabled]="btnProximo" (click)="validaResposta()" color="dark">
+              Próxima
+              <ion-icon name='arrow-forward'></ion-icon>
+            </button>
+          </p>
+        </div>
+      </ion-card-content>
+    </ion-card>

@@ -1,0 +1,33 @@
+
+<ion-header>
+
+  <ion-navbar color="dark">
+    <ion-title>Treino</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!--Card do Objetico do Treino-->
+  <ion-card class="cardobjetivo">
+    <ion-card-header class="cardheader">
+      Objetivo do Treino
+    </ion-card-header>
+    <ion-card-content>
+      Treino para perda de peso e ganho de massa muscular
+    </ion-card-content>
+  </ion-card>
+  <!--Card da lista de exercicios-->
+  <ion-card>
+    <ion-card-header class="cardheader">
+      Exercicios
+    </ion-card-header>
+    <ion-list>
+      <button ion-item class="cardheader" (click)="exercicio()" *ngFor="let exec of treino">
+        <ion-icon name="body" item-start></ion-icon>
+        {{ exec.exercicio }}
+      </button>
+    </ion-list>
+  </ion-card>
+</ion-content>
