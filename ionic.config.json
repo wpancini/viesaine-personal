@@ -1,5 +1,7 @@
 {
   "name": "viesaine",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

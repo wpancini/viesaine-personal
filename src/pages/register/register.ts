@@ -5,6 +5,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { PasswordValidator } from '../../validators/password.validator';
 import { AngularFireAuth } from 'angularfire2/auth';
+import isValidCpf from '@brazilian-utils/is-valid-cpf';
 
 @IonicPage()
 @Component({
@@ -19,6 +20,7 @@ export class RegisterPage {
   senha: string;
   confirma_senha: string;
   sexo: string;
+  cpf: number;
 
   validations_form: FormGroup;
   matching_passwords_group: FormGroup;
@@ -26,7 +28,7 @@ export class RegisterPage {
   mostarnome: string = this.nome + " " + this.sobrenome;
   usuariologado: any;
   dadosGeral: number = 3;
-  dados: number = 1;
+  dados: number = 0;
   flagEnviar: boolean = false;
 
   constructor(public navCtrl: NavController,
@@ -35,6 +37,7 @@ export class RegisterPage {
               public toastCtrl: ToastController,
               public formBuilder: FormBuilder){
   }
+
   ionViewWillLoad() {
     this.matching_passwords_group = new FormGroup({
       senha: new FormControl('', Validators.compose([
@@ -44,41 +47,45 @@ export class RegisterPage {
       ])),
       confirma_senha: new FormControl('', Validators.required)
     }, (formGroup: FormGroup) => {
+      console.log("******1");
       return PasswordValidator.areEqual(formGroup);
     });
-
     this.validations_form = this.formBuilder.group({
+      matching_passwords: this.matching_passwords_group,
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])),
-      senha: new FormControl('', Validators.compose([
-        Validators.minLength(5),
-        Validators.required,
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-      ])),
-      confirma_senha: new FormControl('', Validators.compose([
-        Validators.minLength(5),
-        Validators.required,
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-      ])),
       nome: new FormControl('', Validators.required),
       sobrenome: new FormControl('', Validators.required),
       sexo: new FormControl('', Validators.required),
-      matching_passwords: this.matching_passwords_group,
       cpf: new FormControl('', Validators.compose([
         Validators.maxLength(11),
         Validators.minLength(11),
         Validators.pattern('[0-9]'),
         Validators.required
       ])),
+      nascimento: new FormControl('',Validators.required),
+      logradouro: new FormControl('',Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]')
+      ])),
+      numero: new FormControl('',Validators.compose([
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9_.+-]')
+      ])),
+      complemento: new FormControl(''),
+      bairro: new FormControl('', Validators.required),
+      cidade: new FormControl('', Validators.required),
+      uf: new FormControl('', Validators.required)
     });
   }
+
   validation_messages = {
     'nome': [
       { type: 'required', message: 'Nome é obrigatório.' }
     ],
-    'lastname': [
+    'sobrenome': [
       { type: 'required', message: 'Sobrenome é obrigatório.' }
     ],
     'email': [
@@ -103,8 +110,7 @@ export class RegisterPage {
 //    'terms': [
 //      { type: 'pattern', message: 'You must accept terms and conditions.' }
 //    ],
-  };
-
+  }
   registrar(){
     let toast = this.toastCtrl.create({duration: 2000, position:'botton'});
     // cria usuario no Firebase
@@ -156,6 +162,13 @@ export class RegisterPage {
          }
          toast.present();
     });
+  }
+  validaCpf(){
+    if(this.cpf != null){
+      return isValidCpf(this.cpf);
+    }else{
+      return true;
+    }
   }
   previous(){
     if(this.dados > 0)

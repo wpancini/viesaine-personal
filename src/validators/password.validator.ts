@@ -12,9 +12,12 @@ export class PasswordValidator {
         let control: FormControl = <FormControl>formGroup.controls[key];
 
         if (val === undefined) {
+          console.log("******2");
           val = control.value
         } else {
+          console.log("******3");
           if (val !== control.value) {
+            console.log("******4");
             valid = false;
             break;
           }

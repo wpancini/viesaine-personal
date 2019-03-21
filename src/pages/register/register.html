@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <form class="form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
-    <div *ngIf="dados==1">
+    <div>
       <p class="titulo">Dados do Login</p>
       <ion-item>
         <ion-label stacked>
@@ -47,93 +47,109 @@
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.confirma_senha">
-            <div class="error-message"
-              *ngIf="validations_form.get('matching_passwords').get('confirma_senha').hasError(validation.type)
-                                                  && (validations_form.get('matching_passwords').get('confirma_senha').dirty
-                                                      || validations_form.get('matching_passwords').get('confirma_senha').touched)">
+            <div class="error-message" *ngIf="validations_form.get('matching_passwords').get('confirma_senha').hasError(validation.type)
+                && (validations_form.get('matching_passwords').get('confirma_senha').dirty
+                || validations_form.get('matching_passwords').get('confirma_senha').touched)">
               {{ validation.message }}
             </div>
           </ng-container>
         </div>
       </div>
     </div>
-    <!--
-    <div *ngIf="dados==2">
-          <p class="titulo">Dados Pessoais</p>
-          <ion-item>
-              <ion-label stacked><ion-icon ios="ios-person" md="md-person"></ion-icon> Nome: </ion-label>
-              <ion-input type="text" formControlName="nome"></ion-input>
-          </ion-item>
-          <div class="validation-errors">
-              <ng-container *ngFor="let validation of validation_messages.nome">
-                <div class="error-message" *ngIf="validations_form.get('nome').hasError(validation.type) && (validations_form.get('nome').dirty || validations_form.get('nome').touched)">
-                  {{ validation.message }}
-                </div>
-              </ng-container>
+    <div>
+      <p class="titulo">Dados Pessoais</p>
+      <ion-item>
+        <ion-label stacked>
+          <ion-icon ios="ios-person" md="md-person"></ion-icon> Nome:
+        </ion-label>
+        <ion-input type="text" formControlName="nome"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.nome">
+          <div class="error-message"
+            *ngIf="validations_form.get('nome').hasError(validation.type) && (validations_form.get('nome').dirty || validations_form.get('nome').touched)">
+            {{ validation.message }}
           </div>
-          <ion-item>
-              <ion-label stacked><ion-icon ios="ios-person" md="md-person"></ion-icon> Sobrenome: </ion-label>
-              <ion-input type="text" formControlName="sobrenome"></ion-input>
-          </ion-item>
-          <div class="validation-errors">
-              <ng-container *ngFor="let validation of validation_messages.sobrenome">
-                <div class="error-message" *ngIf="validations_form.get('sobrenome').hasError(validation.type) && (validations_form.get('sobrenome').dirty || validations_form.get('sobrenome').touched)">
-                  {{ validation.message }}
-                </div>
-              </ng-container>
-          </div>
-          <ion-item>
-              <ion-label class="fonteMenor" stacked>
-                  <ion-icon ios="ios-woman" md="md-woman"></ion-icon>
-                  <ion-icon ios="ios-man" md="md-man"></ion-icon>
-                  Sexo</ion-label>
-              <ion-select formControlName="sexo" class="fonteMenor">
-                <ion-option value="f">Feminino</ion-option>
-                <ion-option value="m">Masculino</ion-option>
-              </ion-select>
-          </ion-item>
-          <div class="validation-errors">
-              <ng-container *ngFor="let validation of validation_messages.sexo">
-                <div class="error-message" *ngIf="validations_form.get('sexo').hasError(validation.type) && (validations_form.get('sexo').dirty || validations_form.get('sexo').touched)">
-                  {{ validation.message }}
-                </div>
-              </ng-container>
-          </div>
-          <ion-item>
-              <ion-label class="fonteMenor" stacked><ion-icon ios="ios-person" md="md-person"></ion-icon> CPF (somente números): </ion-label>
-              <ion-input type="number" formControlName="cpf"></ion-input>
-          </ion-item>
-
-          <ion-item>
-              <ion-label class="fonteMenor" stacked>Data Nascimento</ion-label>
-              <ion-datetime class="fonteMenor" displayFormat="DD MM YYYY" formControlName="dtNascimento"></ion-datetime>
-          </ion-item>
+        </ng-container>
       </div>
-      <div *ngIf="dados==3">
-        <p class="titulo">Endereço</p>
-        <ion-item>
-          <ion-label stacked> Logradouro: </ion-label>
-          <ion-input class="fonteMenor" type="text" formControlName="logradouro"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked> Número: </ion-label>
-          <ion-input class="fonteMenor" type="text" formControlName="numero"></ion-input>
+      <ion-item>
+        <ion-label stacked>
+          <ion-icon ios="ios-person" md="md-person"></ion-icon> Sobrenome:
+        </ion-label>
+        <ion-input type="text" formControlName="sobrenome"></ion-input>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.sobrenome">
+          <div class="error-message"
+            *ngIf="validations_form.get('sobrenome').hasError(validation.type) && (validations_form.get('sobrenome').dirty || validations_form.get('sobrenome').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label class="fonteMenor" stacked>
+          <ion-icon ios="ios-woman" md="md-woman"></ion-icon>
+          <ion-icon ios="ios-man" md="md-man"></ion-icon>
+          Sexo
+        </ion-label>
+        <ion-select formControlName="sexo">
+          <ion-option value="f">Feminino</ion-option>
+          <ion-option value="m">Masculino</ion-option>
+        </ion-select>
+      </ion-item>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.sexo">
+          <div class="error-message"
+            *ngIf="validations_form.get('sexo').hasError(validation.type) && (validations_form.get('sexo').dirty || validations_form.get('sexo').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+      <ion-item>
+        <ion-label class="fonteMenor" stacked>Data Nascimento</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="nascimento"></ion-datetime>
+      </ion-item>
+    </div>
+    <ion-item>
+      <ion-label class="fonteMenor" stacked>
+        <ion-icon ios="ios-person" md="md-person"></ion-icon> CPF (somente números):
+      </ion-label>
+      <ion-input type="number" formControlName="cpf" [(ngModel)]="cpf"></ion-input>
+    </ion-item>
+    <ion-item>
+      <div class="validation-errors">
+        <ng-container *ngIf="!validaCpf()">
+          <div class="error-message" *ngIf="!validaCpf()">
+            CPF Inválido!
+          </div>
+        </ng-container>
+      </div>
+    </ion-item>
+    <div>
+      <p class="titulo">Endereço</p>
+      <ion-item>
+        <ion-label stacked> Logradouro: </ion-label>
+        <ion-input class="fonteMenor" type="text" formControlName="logradouro"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-label stacked> Complemento: </ion-label>
-          <ion-input class="fonteMenor" type="text" formControlName="complemento"></ion-input>
+        <ion-label stacked> Número: </ion-label>
+        <ion-input class="fonteMenor" type="text" formControlName="numero"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-label stacked> Bairro: </ion-label>
-          <ion-input class="fonteMenor" type="text" formControlName="bairro"></ion-input>
+        <ion-label stacked> Complemento: </ion-label>
+        <ion-input class="fonteMenor" type="text" formControlName="complemento"></ion-input>
       </ion-item>
       <ion-item>
-          <ion-label stacked> Cidade: </ion-label>
-          <ion-input class="fonteMenor" type="text" formControlName="cidade"></ion-input>
+        <ion-label stacked> Bairro: </ion-label>
+        <ion-input class="fonteMenor" type="text" formControlName="bairro"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked> Cidade: </ion-label>
+        <ion-input class="fonteMenor" type="text" formControlName="cidade"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label class="fonteMenor" stacked> UF:</ion-label>
-        <ion-select formControlName="uf" class="fonteMenor">
+        <ion-select formControlName="uf">
           <ion-option value="AC">Acre</ion-option>
           <ion-option value="AL">Alagoas</ion-option>
           <ion-option value="AP">Amapá</ion-option>
@@ -163,20 +179,9 @@
           <ion-option value="TO">Tocantins</ion-option>
         </ion-select>
       </ion-item>
-      </div>
-      <!-- botoes de navegacao-->
-    <div *ngIf="!flagEnviar" padding>
-      <button ion-button small icon-start [disabled]="btnAnterior" (click)="previous()" color="dark">
-        <ion-icon name='arrow-back'></ion-icon>
-        Anterior
-      </button>
-      <button ion-button small icon-end [disabled]="btnProximo" (click)="validaResposta()" color="dark">
-        Próxima
-        <ion-icon name='arrow-forward'></ion-icon>
-      </button>
     </div>
     <!-- botoes de enviar/cancelar-->
-    <div *ngIf="flagEnviar">
+    <div class="centralizabotao">
       <button ion-button small icon-start (click)="cancelar()" color="dark">
         <ion-icon name='close'></ion-icon>Cancelar
       </button>
