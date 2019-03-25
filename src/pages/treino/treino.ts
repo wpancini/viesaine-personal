@@ -1,6 +1,8 @@
 import { ExercicioPage } from './../exercicio/exercicio';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @IonicPage()
 @Component({
@@ -19,7 +21,7 @@ export class TreinoPage {
 
   ]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private fire: AngularFireAuth) {
   }
 
   ionViewDidLoad() {
@@ -28,5 +30,9 @@ export class TreinoPage {
   exercicio(){
     this.navCtrl.push(ExercicioPage);
   }
+  logout(){
 
+    this.fire.auth.signOut();
+    this.navCtrl.setRoot(HomePage);
+  }
 }

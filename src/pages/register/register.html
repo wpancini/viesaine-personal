@@ -12,7 +12,7 @@
         <ion-label stacked>
           <ion-icon ios="ios-mail" md="md-mail"></ion-icon> Email:
         </ion-label>
-        <ion-input type="text" formControlName="email"></ion-input>
+        <ion-input type="text" formControlName="email" [(ngModel)]="cliente.email"></ion-input>
       </ion-item>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.email">
@@ -27,7 +27,7 @@
           <ion-label stacked>
             <ion-icon ios="ios-lock" md="md-lock"></ion-icon> Senha:
           </ion-label>
-          <ion-input type="password" formControlName="senha"></ion-input>
+          <ion-input type="password" formControlName="senha" [(ngModel)]="senha"></ion-input>
         </ion-item>
         <div class="validation-errors">
           <ng-container *ngFor="let validation of validation_messages.senha">
@@ -62,7 +62,7 @@
         <ion-label stacked>
           <ion-icon ios="ios-person" md="md-person"></ion-icon> Nome:
         </ion-label>
-        <ion-input type="text" formControlName="nome"></ion-input>
+        <ion-input type="text" formControlName="nome" [(ngModel)]="cliente.nome"></ion-input>
       </ion-item>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.nome">
@@ -76,7 +76,7 @@
         <ion-label stacked>
           <ion-icon ios="ios-person" md="md-person"></ion-icon> Sobrenome:
         </ion-label>
-        <ion-input type="text" formControlName="sobrenome"></ion-input>
+        <ion-input type="text" formControlName="sobrenome" [(ngModel)]="cliente.sobrenome"></ion-input>
       </ion-item>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validation_messages.sobrenome">
@@ -92,7 +92,7 @@
           <ion-icon ios="ios-man" md="md-man"></ion-icon>
           Sexo
         </ion-label>
-        <ion-select formControlName="sexo">
+        <ion-select formControlName="sexo" [(ngModel)]="cliente.sexo">
           <ion-option value="f">Feminino</ion-option>
           <ion-option value="m">Masculino</ion-option>
         </ion-select>
@@ -107,14 +107,14 @@
       </div>
       <ion-item>
         <ion-label class="fonteMenor" stacked>Data Nascimento</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="nascimento"></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="nascimento" [(ngModel)]="cliente.nascimento"></ion-datetime>
       </ion-item>
     </div>
     <ion-item>
       <ion-label class="fonteMenor" stacked>
         <ion-icon ios="ios-person" md="md-person"></ion-icon> CPF (somente números):
       </ion-label>
-      <ion-input type="number" formControlName="cpf" [(ngModel)]="cpf"></ion-input>
+      <ion-input type="number" formControlName="cpf" [(ngModel)]="cliente.cpf"></ion-input>
     </ion-item>
     <ion-item>
       <div class="validation-errors">
@@ -129,27 +129,27 @@
       <p class="titulo">Endereço</p>
       <ion-item>
         <ion-label stacked> Logradouro: </ion-label>
-        <ion-input class="fonteMenor" type="text" formControlName="logradouro"></ion-input>
+        <ion-input class="fonteMenor" type="text" formControlName="logradouro" [(ngModel)]="cliente.logradouro"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked> Número: </ion-label>
-        <ion-input class="fonteMenor" type="text" formControlName="numero"></ion-input>
+        <ion-input class="fonteMenor" type="text" formControlName="numero" [(ngModel)]="cliente.numero"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked> Complemento: </ion-label>
-        <ion-input class="fonteMenor" type="text" formControlName="complemento"></ion-input>
+        <ion-input class="fonteMenor" type="text" formControlName="complemento" [(ngModel)]="cliente.complemento"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked> Bairro: </ion-label>
-        <ion-input class="fonteMenor" type="text" formControlName="bairro"></ion-input>
+        <ion-input class="fonteMenor" type="text" formControlName="bairro" [(ngModel)]="cliente.bairro"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked> Cidade: </ion-label>
-        <ion-input class="fonteMenor" type="text" formControlName="cidade"></ion-input>
+        <ion-input class="fonteMenor" type="text" formControlName="cidade" [(ngModel)]="cliente.cidade"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label class="fonteMenor" stacked> UF:</ion-label>
-        <ion-select formControlName="uf">
+        <ion-select formControlName="uf" [(ngModel)]="cliente.uf">
           <ion-option value="AC">Acre</ion-option>
           <ion-option value="AL">Alagoas</ion-option>
           <ion-option value="AP">Amapá</ion-option>

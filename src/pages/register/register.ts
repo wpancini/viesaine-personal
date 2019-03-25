@@ -1,11 +1,12 @@
-
-import { ProfilePage } from './../profile/profile';
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { PasswordValidator } from '../../validators/password.validator';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 import isValidCpf from '@brazilian-utils/is-valid-cpf';
+
+import { Cliente } from './../../models/cliente/cliente.model';
 
 @IonicPage()
 @Component({
@@ -14,18 +15,12 @@ import isValidCpf from '@brazilian-utils/is-valid-cpf';
 })
 export class RegisterPage {
 
-  nome: string;
-  sobrenome: string;
-  email: string;
+  cliente: Cliente = new Cliente();
   senha: string;
-  confirma_senha: string;
-  sexo: string;
-  cpf: number;
-
   validations_form: FormGroup;
   matching_passwords_group: FormGroup;
 
-  mostarnome: string = this.nome + " " + this.sobrenome;
+  mostarnome: string = this.cliente.nome + " " + this.cliente.sobrenome;
   usuariologado: any;
   dadosGeral: number = 3;
   dados: number = 0;
@@ -34,6 +29,7 @@ export class RegisterPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public fire: AngularFireAuth,
+              public db: AngularFireDatabase,
               public toastCtrl: ToastController,
               public formBuilder: FormBuilder){
   }
@@ -47,7 +43,7 @@ export class RegisterPage {
       ])),
       confirma_senha: new FormControl('', Validators.required)
     }, (formGroup: FormGroup) => {
-      console.log("******1");
+      //console.log("******1");
       return PasswordValidator.areEqual(formGroup);
     });
     this.validations_form = this.formBuilder.group({
@@ -114,17 +110,19 @@ export class RegisterPage {
   registrar(){
     let toast = this.toastCtrl.create({duration: 2000, position:'botton'});
     // cria usuario no Firebase
-    this.fire.auth.createUserWithEmailAndPassword(this.email, this.senha)
+    this.fire.auth.createUserWithEmailAndPassword(this.cliente.email, this.senha)
     .then(data => {
           // faz login com email e senha cadastrados
-          this.fire.auth.signInWithEmailAndPassword(this.email, this.senha)
+          this.fire.auth.signInWithEmailAndPassword(this.cliente.email, this.senha)
           .then(data => {
+            console.log("1 - registrou usuario");
             //atualiza profile no Firebase com o Nome
             this.fire.auth.currentUser.updateProfile({displayName: this.mostarnome,photoURL: null
             })
             .then(data =>{
-              console.log('Usuario logado=>',this.fire.auth.currentUser.displayName);
-              this.navCtrl.setRoot(ProfilePage);
+              console.log("2 - atualizou o profile");
+              // grava dados do cliente no firebase db
+              this.db.database.ref("clientes/" + this.fire.auth.currentUser.uid).set(this.cliente);
             })
             .catch((error: any)=>{
               toast.setMessage('Problema na atualização do Profile!');
@@ -164,8 +162,8 @@ export class RegisterPage {
     });
   }
   validaCpf(){
-    if(this.cpf != null){
-      return isValidCpf(this.cpf);
+    if(this.cliente.cpf != null){
+      return isValidCpf(this.cliente.cpf);
     }else{
       return true;
     }
