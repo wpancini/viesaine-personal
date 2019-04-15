@@ -115,12 +115,12 @@ export class RegisterPage {
           // faz login com email e senha cadastrados
           this.fire.auth.signInWithEmailAndPassword(this.cliente.email, this.senha)
           .then(data => {
-            console.log("1 - registrou usuario");
+            //console.log("1 - registrou usuario");
             //atualiza profile no Firebase com o Nome
             this.fire.auth.currentUser.updateProfile({displayName: this.mostarnome,photoURL: null
             })
             .then(data =>{
-              console.log("2 - atualizou o profile");
+              //console.log("2 - atualizou o profile");
               // grava dados do cliente no firebase db
               this.db.database.ref("clientes/" + this.fire.auth.currentUser.uid).set(this.cliente);
             })

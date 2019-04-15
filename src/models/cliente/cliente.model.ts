@@ -1,13 +1,13 @@
 export class Cliente {
     // login
-
     email: string;
+
     // dados pessoais
     nome: string;
     sobrenome: string;
     nascimento: string;
     sexo: string;
-    cpf: number;
+    cpf: string;
 
     //endereco
     lougradouro: string;
@@ -16,5 +16,8 @@ export class Cliente {
     bairro: string;
     cidade: string;
     uf: string;
+
+    // Status cadastral
+    status: number;
 
 }
