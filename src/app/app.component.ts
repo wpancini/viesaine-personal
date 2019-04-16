@@ -24,10 +24,53 @@ export class MyApp {
     const authObserver = afAuth.authState.subscribe( users => {
         if(users){
 
-          this.clientes = db.list("clientes/" + afAuth.auth.currentUser.uid);
-
-          this.rootPage = TreinoPage;
-          authObserver.unsubscribe();
+          console.log("entrou no users");
+          this.clientes = db.list("clientes/" + afAuth.auth.currentUser.uid).valueChanges();
+          console.log("clientes: -> " + this.clientes);
+          this.cliente = this.clientes[0];
+            console.log("cliente = " + this.cliente);
+          switch(this.cliente.status) {
+            case 10: {
+              console.log("status = " + this.cliente.status);
+              this.rootPage = TreinoPage;
+              authObserver.unsubscribe();
+               break;
+            }
+            case 20: {
+              console.log("status = " + this.cliente.status);
+              this.rootPage = TreinoPage;
+              authObserver.unsubscribe();
+               break;
+            }
+            case 30: {
+              console.log("status = " + this.cliente.status);
+              this.rootPage = TreinoPage;
+              authObserver.unsubscribe();
+              break;
+            }
+            case 40: {
+              console.log("status = " + this.cliente.status);
+              this.rootPage = TreinoPage;
+              authObserver.unsubscribe();
+              break;
+            }
+            case 90: {
+              console.log("status = " + this.cliente.status);
+              this.rootPage = TreinoPage;
+              authObserver.unsubscribe();
+              break;
+            }
+            case 99: {
+              this.rootPage = TreinoPage;
+              authObserver.unsubscribe();
+              break;
+            }
+            default: {
+              this.rootPage = TreinoPage;
+              authObserver.unsubscribe();
+               break;
+            }
+         }
         }else{
           this.rootPage = HomePage;
           authObserver.unsubscribe();
