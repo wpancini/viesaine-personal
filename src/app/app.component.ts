@@ -16,8 +16,9 @@ import { Observable } from 'rxjs/Observable';
 export class MyApp {
   rootPage:any;
 
-  cliente: Cliente;
+  cliente_obs: Observable<any>;
   clientes: Observable<any[]>;
+  cliente : Cliente;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               afAuth: AngularFireAuth, db: AngularFireDatabase) {
@@ -25,14 +26,17 @@ export class MyApp {
     const authObserver = afAuth.authState.subscribe( users => {
         if(users){
           console.log("entrou no users");
-          db.database.ref("clientes/" + afAuth.auth.currentUser.uid).once("value").then(function(snapshot){
-            this.cliente = snapshot.cliente;
-            console.log("cliente: -> " + this.cliente);
-          });
+          this.cliente_obs = db.list("clientes/" + afAuth.auth.currentUser.uid).valueChanges();
+          console.log("imprime o obs => " + this.cliente_obs.map);
+         // db.database.ref("clientes/" + afAuth.auth.currentUser.uid).once("value").then(function(snapshot){
+         //   this.cliente = snapshot.cliente;
+         //   console.log("cliente: -> " + this.cliente);
+         // });'
           
           //this.cliente = this.clientes[0];
-          console.log("cliente = " + this.cliente);
-          console.log("status = " + this.cliente.status);
+          //console.log("cliente = " + this.cliente);
+          //console.log("status = " + this.cliente.status);
+         /*
           switch(this.cliente.status) {
             case 10: {
               this.rootPage = TreinoPage;
@@ -74,7 +78,7 @@ export class MyApp {
           this.rootPage = HomePage;
           authObserver.unsubscribe();
         }
-    })
+    })*/
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
