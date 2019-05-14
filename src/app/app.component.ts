@@ -35,7 +35,6 @@ export class MyApp {
          //   this.cliente = snapshot.cliente;
          //   console.log("cliente: -> " + this.cliente);
          // });'
-
           //this.cliente = this.clientes[0];
           //console.log("cliente = " + this.cliente);
           //console.log("status = " + this.cliente.status);
