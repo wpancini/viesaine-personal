@@ -6,56 +6,62 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TreinoPage } from './../pages/treino/treino';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, snapshotChanges, DatabaseReference } from 'angularfire2/database';
 import { HomePage } from '../pages/home/home';
 import { Observable } from 'rxjs/Observable';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any;
 
-  cliente: Cliente;
+  cliente_ref: DatabaseReference;
   clientes: Observable<any[]>;
+  cliente : any;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               afAuth: AngularFireAuth, db: AngularFireDatabase) {
 
     const authObserver = afAuth.authState.subscribe( users => {
         if(users){
-
           console.log("entrou no users");
-          this.clientes = db.list("clientes/" + afAuth.auth.currentUser.uid).valueChanges();
-          console.log("clientes: -> " + this.clientes);
-          this.cliente = this.clientes[0];
-            console.log("cliente = " + this.cliente);
+          //this.cliente = db.database.ref("clientes/" + afAuth.auth.currentUser.uid + ".json");
+          this.cliente_ref = db.database.refFromURL("https://viesaine-aca99.firebaseio.com/clientes/"+ afAuth.auth.currentUser.uid);
+          this.cliente = this.cliente_ref.toJSON;
+          console.log("clientes/" + afAuth.auth.currentUser.uid);
+          console.log(this.cliente);
+         // db.database.ref("clientes/" + afAuth.auth.currentUser.uid).once("value").then(function(snapshot){
+         //   this.cliente = snapshot.cliente;
+         //   console.log("cliente: -> " + this.cliente);
+         // });'
+
+          //this.cliente = this.clientes[0];
+          //console.log("cliente = " + this.cliente);
+          //console.log("status = " + this.cliente.status);
+         /*
           switch(this.cliente.status) {
             case 10: {
-              console.log("status = " + this.cliente.status);
               this.rootPage = TreinoPage;
               authObserver.unsubscribe();
                break;
             }
             case 20: {
-              console.log("status = " + this.cliente.status);
               this.rootPage = TreinoPage;
               authObserver.unsubscribe();
                break;
             }
             case 30: {
-              console.log("status = " + this.cliente.status);
               this.rootPage = TreinoPage;
               authObserver.unsubscribe();
               break;
             }
             case 40: {
-              console.log("status = " + this.cliente.status);
               this.rootPage = TreinoPage;
               authObserver.unsubscribe();
               break;
             }
             case 90: {
-              console.log("status = " + this.cliente.status);
               this.rootPage = TreinoPage;
               authObserver.unsubscribe();
               break;
@@ -70,7 +76,7 @@ export class MyApp {
               authObserver.unsubscribe();
                break;
             }
-         }
+         }*/
         }else{
           this.rootPage = HomePage;
           authObserver.unsubscribe();
@@ -85,4 +91,3 @@ export class MyApp {
     });
   }
 }
-
