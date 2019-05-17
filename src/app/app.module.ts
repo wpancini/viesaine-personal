@@ -18,6 +18,8 @@ import { TreinoPage } from './../pages/treino/treino';
 import { ExercicioPage } from '../pages/exercicio/exercicio';
 import { AnamnesePage } from './../pages/anamnese/anamnese';
 import { ProfilePage } from './../pages/profile/profile';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 const FirebaseAuth = {
   apiKey: "AIzaSyDt-TSLiLJn7oqoLQC5BQWMdMsbQIttRjs",
@@ -45,7 +47,9 @@ const FirebaseAuth = {
     IonicModule.forRoot(MyApp),
     AngularFireAuthModule,
     AngularFireModule.initializeApp(FirebaseAuth),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule,
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
