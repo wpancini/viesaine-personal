@@ -20,6 +20,7 @@ import { AnamnesePage } from './../pages/anamnese/anamnese';
 import { ProfilePage } from './../pages/profile/profile';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { UserProvider } from '../providers/user/user';
 
 const FirebaseAuth = {
   apiKey: "AIzaSyDt-TSLiLJn7oqoLQC5BQWMdMsbQIttRjs",
@@ -65,7 +66,8 @@ const FirebaseAuth = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserProvider
   ]
 })
 export class AppModule {}

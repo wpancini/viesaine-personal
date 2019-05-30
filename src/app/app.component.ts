@@ -6,30 +6,26 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { UserProvider } from '../providers/user/user';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any;
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
-  };
+
   cliente : Cliente;
-  clienteObs: Observable<any>;
+  status: string;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-              afAuth: AngularFireAuth, http: HttpClient) {
+              afAuth: AngularFireAuth, prov: UserProvider) {
 
     const authObserver = afAuth.authState.subscribe( users => {
         if(users){
           console.log("entrou no users");
-          this.clienteObs = http.get<Cliente>("https://viesaine-aca99.firebaseio.com/clientes" + afAuth.auth.currentUser.uid + ".json", this.httpOptions)
-          this.clienteObs.subscribe(data => this.cliente = data)
+          prov.getUserData(afAuth.auth.currentUser.uid).subscribe(data =>{});
           console.log("clientes/" + afAuth.auth.currentUser.uid);
-          console.log("cliente.status => " + this.cliente.status);
+          console.log("cliente.status => " + this.status);
          // db.database.ref("clientes/" + afAuth.auth.currentUser.uid).once("value").then(function(snapshot){
          //   this.cliente = snapshot.cliente;
          //   console.log("cliente: -> " + this.cliente);
