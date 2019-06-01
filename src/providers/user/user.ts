@@ -1,5 +1,6 @@
-import { Http } from '@angular/http';
+import { Cliente } from './../../models/cliente/cliente.model';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 /*
   Generated class for the UserProvider provider.
@@ -10,13 +11,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UserProvider {
 
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');
   }
 
   getUserData(uid: string){
-    return this.http.get("https://viesaine-aca99.firebaseio.com/clientes" + uid + ".json")
-                    .map(res => res.json());
+    return this.http.get<Cliente>("https://viesaine-aca99.firebaseio.com/clientes" + uid + ".json");
   }
 
 
