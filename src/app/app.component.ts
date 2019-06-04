@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { UserProvider } from '../providers/user/user';
+import { TreinoPage } from '../pages/treino/treino';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,17 +24,9 @@ export class MyApp {
     const authObserver = afAuth.authState.subscribe( users => {
         if(users){
           console.log("entrou no users");
-          prov.getUserData(afAuth.auth.currentUser.uid).subscribe(data =>{});
+          prov.getUserData(afAuth.auth.currentUser.uid).subscribe(data =>{ this.cliente = data});
           console.log("clientes/" + afAuth.auth.currentUser.uid);
-          console.log("cliente.status => " + this.status);
-         // db.database.ref("clientes/" + afAuth.auth.currentUser.uid).once("value").then(function(snapshot){
-         //   this.cliente = snapshot.cliente;
-         //   console.log("cliente: -> " + this.cliente);
-         // });'
-          //this.cliente = this.clientes[0];
-          //console.log("cliente = " + this.cliente);
-          //console.log("status = " + this.cliente.status);
-         /*
+          console.log("cliente -> " + this.cliente);
           switch(this.cliente.status) {
             case 10: {
               this.rootPage = TreinoPage;
@@ -70,7 +63,7 @@ export class MyApp {
               authObserver.unsubscribe();
                break;
             }
-         }*/
+         }
         }else{
           this.rootPage = HomePage;
           authObserver.unsubscribe();

@@ -19,5 +19,6 @@ export class Cliente {
 
     // Status cadastral
     status: number;
+    vigencia: string;
 
 }

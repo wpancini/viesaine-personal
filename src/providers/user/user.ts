@@ -16,7 +16,8 @@ export class UserProvider {
   }
 
   getUserData(uid: string){
-    return this.http.get<Cliente>("https://viesaine-aca99.firebaseio.com/clientes" + uid + ".json");
+    console.log("URL -> " + "https://viesaine-aca99.firebaseio.com/clientes/" + uid + ".json");
+    return this.http.get<Cliente>("https://viesaine-aca99.firebaseio.com/clientes/" + uid + ".json");
   }
 
 
