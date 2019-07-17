@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserProvider {
 
   constructor(public http: HttpClient) {
-    console.log('Hello UserProvider Provider');
+    //console.log('Hello UserProvider Provider');
   }
 
   getUserData(uid: string){

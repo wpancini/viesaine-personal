@@ -1,5 +1,4 @@
 import { Cliente } from './../models/cliente/cliente.model';
-
 import { AngularFireAuth,  } from 'angularfire2/auth';
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
@@ -15,7 +14,7 @@ import { TreinoPage } from '../pages/treino/treino';
 export class MyApp {
   rootPage:any;
 
-  cliente : Cliente;
+  cliente : Cliente = new Cliente();
   status: string;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
@@ -23,10 +22,9 @@ export class MyApp {
 
     const authObserver = afAuth.authState.subscribe( users => {
         if(users){
-          console.log("entrou no users");
-          prov.getUserData(afAuth.auth.currentUser.uid).subscribe(data =>{ this.cliente = data});
-          console.log("clientes/" + afAuth.auth.currentUser.uid);
-          console.log("cliente -> " + this.cliente);
+
+          prov.getUserData(afAuth.auth.currentUser.uid).subscribe(data => { this.cliente = data; });
+
           switch(this.cliente.status) {
             case 10: {
               this.rootPage = TreinoPage;
@@ -63,7 +61,7 @@ export class MyApp {
               authObserver.unsubscribe();
                break;
             }
-         }
+          }
         }else{
           this.rootPage = HomePage;
           authObserver.unsubscribe();

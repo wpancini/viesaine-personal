@@ -10,7 +10,7 @@ export class Cliente {
     cpf: string;
 
     //endereco
-    lougradouro: string;
+    logradouro: string;
     numero: string;
     complemento: string;
     bairro: string;
