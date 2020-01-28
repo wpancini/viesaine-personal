@@ -3,5 +3,7 @@
   "integrations": {
     "cordova": {}
   },
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "target": "es6",
+  "lib": ["es6"]
 }
