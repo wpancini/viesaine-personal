@@ -17,52 +17,55 @@ export class MyApp {
   cliente : Cliente = new Cliente();
   status: string;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-              afAuth: AngularFireAuth, prov: UserProvider) {
+  constructor(platform: Platform, 
+              statusBar: StatusBar,
+              splashScreen: SplashScreen,
+              afAuth: AngularFireAuth, 
+              prov: UserProvider) {
 
-    const authObserver = afAuth.authState.subscribe( users => {
-        if(users){
-
-          prov.getUserData(afAuth.auth.currentUser.uid).subscribe(data => { this.cliente = data; });
-
-          switch(this.cliente.status) {
-            case 10: {
-              this.rootPage = TreinoPage;
-              authObserver.unsubscribe();
-               break;
+    const authObserver = afAuth.authState.subscribe(user => {
+      if(user) {
+        const cons = prov.getUserData(user.uid).subscribe((data: Cliente) => {
+          this.cliente = data;
+            switch(this.cliente.status) {
+              case 10: {
+                this.rootPage = TreinoPage;
+                authObserver.unsubscribe();
+                break;
+              }
+              case 20: {
+                this.rootPage = TreinoPage;
+                authObserver.unsubscribe();
+                break;
+              }
+              case 30: {
+                this.rootPage = TreinoPage;
+                authObserver.unsubscribe();
+                break;
+              }
+              case 40: {
+                this.rootPage = TreinoPage;
+                authObserver.unsubscribe();
+                break;
+              }
+              case 90: {
+                this.rootPage = TreinoPage;
+                authObserver.unsubscribe();
+                break;
+              }
+              case 99: {
+                this.rootPage = TreinoPage;
+                authObserver.unsubscribe();
+                break;
+              }
+              default: {
+                this.rootPage = TreinoPage;
+                authObserver.unsubscribe();
+                break;
+              }
             }
-            case 20: {
-              this.rootPage = TreinoPage;
-              authObserver.unsubscribe();
-               break;
-            }
-            case 30: {
-              this.rootPage = TreinoPage;
-              authObserver.unsubscribe();
-              break;
-            }
-            case 40: {
-              this.rootPage = TreinoPage;
-              authObserver.unsubscribe();
-              break;
-            }
-            case 90: {
-              this.rootPage = TreinoPage;
-              authObserver.unsubscribe();
-              break;
-            }
-            case 99: {
-              this.rootPage = TreinoPage;
-              authObserver.unsubscribe();
-              break;
-            }
-            default: {
-              this.rootPage = TreinoPage;
-              authObserver.unsubscribe();
-               break;
-            }
-          }
-        }else{
+          });
+        } else {
           this.rootPage = HomePage;
           authObserver.unsubscribe();
         }
