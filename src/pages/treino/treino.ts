@@ -1,8 +1,9 @@
 import { ExercicioPage } from './../exercicio/exercicio';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { DomSanitizer } from "@angular/platform-browser";
 
 @IonicPage()
 @Component({
@@ -10,6 +11,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
   templateUrl: 'treino.html',
 })
 export class TreinoPage {
+  videoTreino1 = "https://www.youtube.com/embed/HgJ33r0qWf8";
+  safeUrl: any;
 
   treino: any[]=  [ {'exercicio':'Aquecimento','tempo':'15min','quantidade':'0','repetiçao':'1 vez(es)'},
                     {'exercicio':'Polichinelo','tempo':'0min','quantidade':'20','repetiçao':'3 vez(es)'},
@@ -21,7 +24,21 @@ export class TreinoPage {
 
   ]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fire: AngularFireAuth) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private fire: AngularFireAuth,
+    private sanitizer: DomSanitizer) {
+      this.sanitizer = sanitizer;
+  }
+
+
+  ngOnInit() {
+    this.getVideoUrl(this.videoTreino1);
+  }
+
+  getVideoUrl(vid){
+    return this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(vid);
   }
 
   ionViewDidLoad() {
@@ -30,6 +47,7 @@ export class TreinoPage {
   exercicio(){
     this.navCtrl.push(ExercicioPage);
   }
+
   logout(){
 
     this.fire.auth.signOut();

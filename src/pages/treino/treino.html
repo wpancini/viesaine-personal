@@ -13,12 +13,16 @@
 
 <ion-content padding>
   <!--Card do Objetico do Treino-->
+  <div class="video-container">
+    <iframe width="480" height="315" [src]="this.safeUrl" frameborder="0" allowfullscreen></iframe>
+  </div>
   <ion-card class="cardobjetivo">
     <ion-card-header class="cardheader">
       Objetivo do Treino
     </ion-card-header>
     <ion-card-content>
       Treino para perda de peso e ganho de massa muscular
+      
     </ion-card-content>
   </ion-card>
   <!--Card da lista de exercicios-->

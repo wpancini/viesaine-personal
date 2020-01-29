@@ -44,14 +44,11 @@ export class HomePage {
         if(error.code == 'auth/user-disabled'){
           toast.setMessage('Usuário foi desabilitado!');
         }
-        else if(error.code == 'auth/invalid-email'){
-          toast.setMessage('o email digitado é inválido!');
+        else if(error.code == 'auth/invalid-email' || error.code == 'auth/wrong-password'){
+          toast.setMessage('E-Mail ou senha inválido!');
         }
         else if(error.code == 'auth/user-not-found'){
           toast.setMessage('Usuário não encontrado!');
-        }
-        else if(error.code == 'auth/wrong-password'){
-          toast.setMessage('Senha errada');
         }
         toast.present();
     })
