@@ -13,7 +13,9 @@
 
 <ion-content padding>
   <!--Card do Objetico do Treino-->
-  <iframe width="500" height="315" [src]="this.safeUrl" frameborder="0" allowfullscreen></iframe>
+  <div class="video-container">
+    <iframe width="480" height="315" [src]="this.safeUrl" frameborder="0" allowfullscreen></iframe>
+  </div>
   <ion-card class="cardobjetivo">
     <ion-card-header class="cardheader">
       Objetivo do Treino
